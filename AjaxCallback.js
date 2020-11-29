@@ -9,8 +9,10 @@ function makeAJAXCall(methodType, url, callback, async = true, data = null) {
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         // console.log(methodType + " State Change Called At : " + showTime() + " RS : " + xhr.readyState + " Status : " + xhr.status);
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200 || xhr.status == 201) {
+        if (xhr.readyState == 4) //Connection closed
+        {
+            if (xhr.status == 200 || xhr.status == 201) // 200 : Data Is Retreived , 201 : Data Is Created
+             {
                 callback(xhr.responseText);
             } else if (xhr.status >= 400) {
                 console.log("Handle 400 Client Error Or 500 server error at : " + showTime());
